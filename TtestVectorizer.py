@@ -6,6 +6,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.utils.validation import check_is_fitted
 from sklearn.exceptions import NotFittedError
 
+# for SparseEfficiencyWarning refer to this thread: https://stackoverflow.com/questions/45436741/changing-sparsity-structure-for-a-single-operation
+
 class TtestTransformer(BaseEstimator, TransformerMixin):
     def __init__(self, epsilon=3e-10):
         '''
@@ -119,44 +121,3 @@ class TtestVectorizer:
 
     def fit_transform(self, raw_documents, y=None):
         return self.fit(raw_documents, y).transform(raw_documents)
-
-
-# TEST
-
-# v = TtestVectorizer()
-
-# check fitted DONE
-# corpus = ["Hello, Andy, how are you ?", "This is great, Andy", "I think it is ok"]
-corpus = ['This song is awesome', 'I hate this song', 'This is alright', 'I think I like it']
-
-# v.fit(corpus)
-# check_is_fitted(v)
-
-# check vectorization
-# t = TtestTransformer()
-# v = CountVectorizer()
-#
-# X = v.fit_transform(corpus)
-#
-# print(v.get_feature_names())
-# print(X.toarray())
-# print("Applying T-test")
-#
-# # y = np.array([0, 1, 0])
-# y = np.array([1, 0, 1, 1])
-# X = X.astype(np.single)
-# X = t.fit_transform(X, y=y)
-#
-# print(f'X: {X.toarray()} {X.shape}')
-
-# FINAL TEST
-y_ = np.array([1, 0, 1, 1])
-
-t = TtestVectorizer()
-# t.fit(corpus, y_)
-# X = t.transform(corpus)
-X = t.fit_transform(corpus, y_)
-
-print(f'X: {X.toarray()} {X.shape}')
-
-
