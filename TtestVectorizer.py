@@ -1,3 +1,8 @@
+'''
+Created with love by Sigmoid
+@Author - Smocvin Denis - denis.smocvin@isa.utm.md
+'''
+
 import numpy as np
 
 from sklearn.base import BaseEstimator, TransformerMixin #, _OneToOneFeatureMixin
