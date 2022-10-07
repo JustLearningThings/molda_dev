@@ -44,7 +44,7 @@ class TtestTransformer(BaseEstimator, TransformerMixin):
             The classes of the classification problem.
         :return:
         '''
-        print(X.toarray(), y)
+
         classes = np.unique(y)
         num_samples = len(y)
 
@@ -91,7 +91,7 @@ class TtestVectorizer:
                                           analyzer=analyzer, min_df=min_df, max_df=max_df, max_features=max_features,
                                           vocabulary=vocabulary, binary=binary, dtype=dtype)
 
-        self.transformer, self.BOW = None, None
+        self.transformer, self.BOW, self._y = None, None, None
 
     def fit(self, raw_documents, y=None):
         '''
