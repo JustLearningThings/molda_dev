@@ -8,6 +8,8 @@ import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin #, _OneToOneFeatureMixin
 from sklearn.feature_extraction.text import CountVectorizer
 
+from sklearn.exceptions import NotFittedError
+
 from sklearn.utils.validation import check_is_fitted
 
 class ATCTransformer(BaseEstimator, TransformerMixin):
@@ -86,7 +88,7 @@ class ATCVectorizer:
                                                 max_features=max_features,
                                                 vocabulary=vocabulary, binary=binary, dtype=dtype)
 
-        self.transformer, self.BOW = None, None
+        self.transformer, self.BOW, self._y = y = None, None, None
 
     def fit(self, raw_documents, y=None):
         '''
@@ -100,6 +102,7 @@ class ATCVectorizer:
         self.BOW = self.count_vectorizer.fit_transform(raw_documents)
         self.BOW = self.BOW.astype(np.single)
         self.transformer.fit(self.BOW)
+        self._y = y
 
         return self
 
@@ -111,9 +114,10 @@ class ATCVectorizer:
             The transformed matrix
         '''
 
-        # check_is_fitted(self)
+        if self.BOW is None or self.transformer is None:
+            raise NotFittedError
 
-        return self.transformer.transform(self.BOW)
+        return self.transformer.transform(self.BOW, self._y)
 
     def fit_transform(self, raw_documents, y=None):
-        self.fit(raw_documents).transform(raw_documents)
+        return self.fit(raw_documents, y).transform(raw_documents)

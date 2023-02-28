@@ -4,8 +4,9 @@ Created with love by Sigmoid
 @Author - Sclifos Tudor - tudor.sclifos@isa.utm.md
 '''
 
-from sklearn.base import BaseEstimator, TransformerMixin, _OneToOneFeatureMixin
+from sklearn.base import BaseEstimator, TransformerMixin#, _OneToOneFeatureMixin
 from sklearn.utils.validation import check_is_fitted, check_array, FLOAT_DTYPES, check_scalar
+from sklearn.feature_extraction.text import CountVectorizer
 
 import re
 import unicodedata
@@ -163,7 +164,7 @@ def _check_stop_list(stop):
         return frozenset(stop)
 
 
-class Gref94Transformer(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+class Gref94Transformer(TransformerMixin, BaseEstimator):
 
     def __init__(
             self,

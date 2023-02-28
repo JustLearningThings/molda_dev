@@ -8,7 +8,7 @@ from sklearn.preprocessing import normalize
 from sklearn.utils.validation import check_is_fitted
 
 
-from sklearn.base import BaseEstimator, TransformerMixin, _OneToOneFeatureMixin
+from sklearn.base import BaseEstimator, TransformerMixin
 import numpy as np
 import scipy.sparse as sp
 import warnings
@@ -16,7 +16,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 FLOAT_DTYPES = (np.float16, np.float32, np.float64)
 
 
-class ObservedExpectedTransformer(BaseEstimator, TransformerMixin, _OneToOneFeatureMixin):
+class ObservedExpectedTransformer(BaseEstimator, TransformerMixin):
   def __init__(self, epsilon = 3e-10):
     self.epsilon = epsilon
   

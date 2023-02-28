@@ -8,7 +8,7 @@ from sklearn.preprocessing import normalize
 from sklearn.utils.validation import check_is_fitted
 
 
-from sklearn.base import BaseEstimator, TransformerMixin, _OneToOneFeatureMixin
+from sklearn.base import BaseEstimator, TransformerMixin
 import numpy as np
 import scipy.sparse as sp
 import warnings
@@ -16,7 +16,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 FLOAT_DTYPES = (np.float16, np.float32, np.float64)
 
 
-class TficfTransformer(BaseEstimator, TransformerMixin, _OneToOneFeatureMixin):
+class TficfTransformer(BaseEstimator, TransformerMixin):
 
   def __init__(self, *, norm="l2", use_icf=True, smooth_icf=True, sublinear_tf=False):
     self.norm = norm

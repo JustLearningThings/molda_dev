@@ -4,7 +4,7 @@ Created with love by Sigmoid
 @Author - Sclifos Tudor - tudor.sclifos@isa.utm.md
 '''
 
-from sklearn.base import BaseEstimator, TransformerMixin, _OneToOneFeatureMixin
+from sklearn.base import BaseEstimator, TransformerMixin#, _OneToOneFeatureMixin
 from sklearn.utils.validation import check_is_fitted, check_array, FLOAT_DTYPES, check_scalar
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -165,7 +165,7 @@ def _check_stop_list(stop):
         return frozenset(stop)
 
 
-class LTUTransformer(_OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
+class LTUTransformer(TransformerMixin, BaseEstimator):
 
     def __init__(
             self,
